@@ -3,6 +3,7 @@ import json
 import requests
 from datetime import datetime
 
+
 os.makedirs("public", exist_ok=True)
 with open("public/.keep", "w") as f:
     f.write("")  # пустой файл
@@ -25,6 +26,7 @@ def run():
     # 📁 Сохранение в файл для GitHub Pages
     os.makedirs("public", exist_ok=True)
     filename = f"public/syrve_olap.json"
+    #filename = f"public/syrve_olap_{datetime.today().strftime('%Y%m%d')}.json"
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
