@@ -3,6 +3,10 @@ import json
 import requests
 from datetime import datetime
 
+os.makedirs("public", exist_ok=True)
+with open("public/.keep", "w") as f:
+    f.write("")  # пустой файл
+
 def run():
     # 🔐 Авторизация в Syrve
     login = "roman"
