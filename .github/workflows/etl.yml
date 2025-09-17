@@ -21,7 +21,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 🚀 Run ETL and generate JSON
-        run: python main.py
+        run: python main2.py
 
       - name: 📁 Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
