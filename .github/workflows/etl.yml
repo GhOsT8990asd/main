@@ -23,7 +23,10 @@ jobs:
 
       - name: 🚀 Run ETL and generate JSON
         run: python main.py
-
+        
+      - name: 🧪 List files in public
+        run: ls -la public
+        
       - name: 🌐 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
