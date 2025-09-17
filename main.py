@@ -1,8 +1,6 @@
 import os
 import json
 import requests
-from google.cloud import storage
-from google.oauth2 import service_account
 from datetime import datetime
 
 def run():
@@ -20,24 +18,13 @@ def run():
     )
     data = requests.get(olap_url).json()
 
-    # 🔐 Авторизация в GCP вручную
-    key_path = "gcp_key.json"
-    with open(key_path, "w") as f:
-        f.write(os.environ["GCP_KEY"])
+    # 📁 Сохранение в файл для GitHub Pages
+    os.makedirs("public", exist_ok=True)
+    filename = f"public/syrve_olap_{datetime.today().strftime('%Y%m%d')}.json"
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-    credentials = service_account.Credentials.from_service_account_file(key_path)
-    project_id = credentials.project_id
-    client = storage.Client(project=project_id, credentials=credentials)
-    
-    # ☁️ Загрузка в GCS
-    client = storage.Client(project=project_id, credentials=credentials)
-    bucket = client.bucket("syrve-etl-storage")
-    filename = f"syrve_olap_{datetime.today().strftime('%Y%m%d')}.json"
-    blob = bucket.blob(filename)
-    blob.upload_from_string(json.dumps(data), content_type="application/json")
-    blob.make_public()
-
-    print(f"✅ Uploaded: {blob.public_url}")
+    print(f"✅ Saved locally: {filename}")
 
 if __name__ == "__main__":
     run()
