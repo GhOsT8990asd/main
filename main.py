@@ -4,6 +4,8 @@ import requests
 from datetime import datetime
 
 os.makedirs("public", exist_ok=True)
+with open("public/.keep", "w") as f:
+    f.write("")  # пустой файл
 
 def run():
     # 🔐 Авторизация в Syrve
@@ -12,24 +14,21 @@ def run():
     auth_url = f"https://alimer-comert-co.syrve.online/resto/api/auth?login={login}&pass={password}"
     token = requests.get(auth_url).text.strip()
 
-    # 📅 Динамический диапазон дат
-    date_from = "2025-04-01"
-    date_to = datetime.today().strftime("%Y-%m-%d")
-
     # 📊 Получение OLAP-отчёта
     olap_url = (
         "https://alimer-comert-co.syrve.online/resto/api/v2/reports/olap/byPresetId/"
         "0f032c52-7afb-4b48-87ae-79c5f3ebdfa4"
-        f"?key={token}&dateFrom={date_from}&dateTo={date_to}"
+        f"?key={token}&dateFrom=2025-04-01&dateTo=2025-10-01"
     )
     data = requests.get(olap_url).json()
 
-    # 📁 Сохранение JSON
-    filename = f"public/syrve_olap_{datetime.today().strftime('%Y%m%d')}.json"
+    # 📁 Сохранение в файл для GitHub Pages
+    os.makedirs("public", exist_ok=True)
+    filename = f"public/syrve_olap_.json"
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ Saved: {filename}")
+    print(f"✅ Saved locally: {filename}")
 
 if __name__ == "__main__":
     run()
