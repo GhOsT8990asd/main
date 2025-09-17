@@ -24,7 +24,7 @@ def run():
 
     # 📁 Сохранение в файл для GitHub Pages
     os.makedirs("public", exist_ok=True)
-    filename = f"public/syrve_olap_.json"
+    filename = f"public/syrve_olap.json"
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
