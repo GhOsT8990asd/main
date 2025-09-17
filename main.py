@@ -27,7 +27,8 @@ def run():
 
     credentials = service_account.Credentials.from_service_account_file(key_path)
     project_id = credentials.project_id
-
+    client = storage.Client(project=project_id, credentials=credentials)
+    
     # ☁️ Загрузка в GCS
     client = storage.Client(project=project_id, credentials=credentials)
     bucket = client.bucket("syrve-etl-storage")
