@@ -23,9 +23,9 @@ jobs:
 
       - name: 🔐 Setup GCP credentials
         env:
-          GSC_KEY: ${{ secrets.GSC_KEY }}
+          GCP_KEY: ${{ secrets.GCP_KEY }}
         run: |
-          echo "$GSC_KEY" > gcp_key.json
+          echo "$GCP_KEY" > gcp_key.json
           export GOOGLE_APPLICATION_CREDENTIALS=gcp_key.json
 
       - name: 🚀 Run ETL
