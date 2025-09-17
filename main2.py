@@ -33,10 +33,7 @@ token2 = get_token("beer-house.syrve.online")
 data2 = get_olap("beer-house.syrve.online", "e4894e06-a6d8-4ce6-8333-f73f9dbaeb1c", token2, date_from, date_to)
 
 # 🔗 Объединение данных
-combined = {
-    data1,
-    data2
-}
+combined = data1 + data2
 
 # 💾 Сохранение
 filename = f"public/syrve_combined.json"
