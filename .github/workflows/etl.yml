@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 🚀 Run ETL and generate JSON
-        run: python get_syrve_olap_json.py
+        run: python main.py
 
       - name: 🌐 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
