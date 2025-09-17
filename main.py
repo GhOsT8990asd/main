@@ -1,6 +1,7 @@
-import requests
+import os
 import json
 from google.cloud import storage
+from google.oauth2 import service_account
 from datetime import datetime
 
 def run():
@@ -16,7 +17,15 @@ def run():
     )
     data = requests.get(olap_url).json()
 
-    client = storage.Client()
+    # 🔐 Авторизация вручную
+    key_path = "gcp_key.json"
+    with open(key_path, "w") as f:
+        f.write(os.environ["GCP_KEY"])
+
+    credentials = service_account.Credentials.from_service_account_file(key_path)
+    project_id = credentials.project_id  # ← автоматически берётся из ключа
+
+    client = storage.Client(project=project_id, credentials=credentials)
     bucket = client.bucket("syrve-etl-storage")
     filename = f"syrve_olap_{datetime.today().strftime('%Y%m%d')}.json"
     blob = bucket.blob(filename)
