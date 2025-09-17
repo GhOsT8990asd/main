@@ -16,11 +16,20 @@ def run():
     token = requests.get(auth_url).text.strip()
 
     # 📊 Получение OLAP-отчёта
-    olap_url = (
-        "https://alimer-comert-co.syrve.online/resto/api/v2/reports/olap/byPresetId/"
-        "0f032c52-7afb-4b48-87ae-79c5f3ebdfa4"
-        f"?key={token}&dateFrom=2025-04-01&dateTo=2025-10-01"
+    # 📅 Дата начала фиксированная
+    date_from = "2025-04-01"
+
+# 📅 Дата окончания — сегодня
+    date_to = datetime.today().strftime("%Y-%m-%d")
+
+# 🔗 OLAP URL с динамическим диапазоном
+
+   olap_url = (
+    "https://alimer-comert-co.syrve.online/resto/api/v2/reports/olap/byPresetId/"
+    "0f032c52-7afb-4b48-87ae-79c5f3ebdfa4"
+    f"?key={token}&dateFrom={date_from}&dateTo={date_to}"
     )
+
     data = requests.get(olap_url).json()
 
     # 📁 Сохранение в файл для GitHub Pages
