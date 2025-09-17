@@ -34,8 +34,8 @@ data2 = get_olap("beer-house.syrve.online", "e4894e06-a6d8-4ce6-8333-f73f9dbaeb1
 
 # 🔗 Объединение данных
 combined = {
-    "alimer_comert": data1,
-    "beer_house": data2
+    data1,
+    data2
 }
 
 # 💾 Сохранение
