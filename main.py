@@ -3,7 +3,7 @@ import json
 import requests
 from datetime import datetime
 
-# Создаём папку public, если её нет
+# Создаём папку public
 os.makedirs("public", exist_ok=True)
 
 # Авторизация
@@ -23,10 +23,10 @@ olap_url = (
     f"?key={token}&dateFrom={date_from}&dateTo={date_to}"
 )
 
-# Запрос данных
+# Запрос
 data = requests.get(olap_url).json()
 
-# Сохранение JSON
+# Сохранение
 filename = f"public/syrve_olap_{datetime.today().strftime('%Y%m%d')}.json"
 with open(filename, "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
