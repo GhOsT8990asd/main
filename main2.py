@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 
 os.makedirs("public", exist_ok=True)
 
@@ -23,7 +23,7 @@ def get_olap_data(host, preset_id, token, date_from, date_to):
 
 # 📅 Диапазон дат
 date_from = "2025-04-01"
-date_to = datetime.today().strftime("%Y-%m-%d")
+date_to = (datetime.today() + timedelta(days=1)).strftime("%Y-%m-%d")
 
 # 🏪 Сервер 1: alimer-comert-co
 token1 = get_token("alimer-comert-co.syrve.online")
