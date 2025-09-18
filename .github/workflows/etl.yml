@@ -2,7 +2,9 @@ name: Syrve ETL
 
 on:
   workflow_dispatch:
-
+  schedule:
+    - cron: '*/10 * * * *'
+    
 jobs:
   run-etl:
     runs-on: ubuntu-latest
