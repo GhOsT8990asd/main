@@ -6,3 +6,4 @@
 # there is no choice
 # road to knowere
 # are you nuts
+# thor's hammer
